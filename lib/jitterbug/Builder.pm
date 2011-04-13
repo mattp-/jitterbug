@@ -109,7 +109,7 @@ sub run_task {
     $self->sleep(1); # avoid race conditions
 
     my $repo    = $task->project->url . '.git';
-    my $r       = Git::Repository->create( clone => $repo => $build_dir );
+    my $r       = Git::Repository->create( clone => $repo => $build_dir->stringify );
 
     debug("Checking out " . $task->commit->sha256 . " from $repo into $build_dir\n");
     $r->run( 'checkout', $task->commit->sha256 );
